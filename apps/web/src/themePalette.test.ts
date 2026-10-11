@@ -82,6 +82,22 @@ function contrastRatio(first: string, second: string): number {
 }
 
 describe("theme files", () => {
+  it("keeps Night Owl studio text and actions readable in both appearances", () => {
+    const theme = getThemeDefinition("night-owl-studio")!;
+    for (const colors of [theme.colors, theme.variants!.light!]) {
+      for (const [foreground, background] of [
+        [colors.text, colors.canvas],
+        [colors.textMuted, colors.canvas],
+        [colors.placeholder, colors.surfaceRaised],
+        [colors.messageActionForeground, colors.messageAction],
+        [colors.sidebarForeground, colors.sidebarRowSelected],
+        [colors.codeForeground, colors.codeBackground],
+      ]) {
+        expect(contrastRatio(foreground!, background!)).toBeGreaterThanOrEqual(4.5);
+      }
+    }
+  });
+
   it("keeps every built-in palette value in canonical OKLCH form", () => {
     for (const theme of BUILT_IN_THEMES) {
       for (const colors of [theme.colors, ...Object.values(theme.variants ?? {})]) {

@@ -368,9 +368,9 @@ export function DraftHeroHeadline({
   // in the h1; without an explicit label its widget state bleeds into the
   // announced phrase.
   const headingLabel = isScratchDraft
-    ? "What should we work on?"
+    ? "Make something great."
     : hasResolvedProject
-      ? `What should we build in ${activeProjectDisplayName}?`
+      ? `Let’s build in ${activeProjectDisplayName}.`
       : canChooseProject
         ? `${activeProjectDisplayName ?? "Choose a project"} to start`
         : "Add a project to start";
@@ -403,15 +403,21 @@ export function DraftHeroHeadline({
     ) : null;
 
   return (
-    <div className="mx-auto flex w-full max-w-5xl flex-col items-center">
+    <div className="mx-auto flex w-full max-w-(--chat-content-max-width) flex-col items-start px-1">
+      <div className="mb-4 flex items-center gap-3 font-mono text-2xs font-medium tracking-widest text-muted-foreground uppercase">
+        <span aria-hidden="true" className="h-px w-8 bg-primary" />
+        Your coding workspace
+      </div>
       <h1
         aria-label={headingLabel}
-        className="w-full text-center font-normal text-2xl text-foreground tracking-tight sm:text-3xl"
+        className="w-full text-left font-semibold text-3xl leading-tight text-foreground tracking-tight sm:text-4xl"
       >
         {isScratchDraft ? (
-          <>What should we work on?</>
+          <>
+            Make something <span className="text-primary">great.</span>
+          </>
         ) : hasResolvedProject ? (
-          <>What should we build in {projectSelector}?</>
+          <>Let’s build in {projectSelector}.</>
         ) : canChooseProject ? (
           <>{projectSelector} to start</>
         ) : (

@@ -51,7 +51,7 @@ export const SidebarChromeHeader = memo(function SidebarChromeHeader({
     // The titlebar row, not a padded SidebarHeader: it aligns to the window controls.
     <div
       className={cn(
-        "relative flex h-[var(--workspace-topbar-height)] shrink-0 flex-row items-center gap-2 px-3 md:pl-0",
+        "relative flex h-[var(--workspace-topbar-height)] shrink-0 flex-row items-center gap-2 border-b border-sidebar-border px-3 md:pl-0",
         isElectron && "drag-region",
       )}
     >
@@ -112,7 +112,7 @@ function SidebarBrand({ onBackdrop }: { onBackdrop: boolean }) {
       aria-label="Go to threads"
       className={cn(
         "relative z-10 ml-[var(--workspace-titlebar-content-left)] hidden h-7 w-fit min-w-0 shrink-0 items-center overflow-hidden rounded-md outline-hidden ring-ring focus-visible:ring-2 focus-visible:ring-inset md:flex",
-        onBackdrop ? "text-white" : "text-foreground",
+        onBackdrop ? "text-white" : "text-primary",
       )}
       to="/"
     >
@@ -125,7 +125,7 @@ function SidebarBrandMark({ onBackdrop }: { onBackdrop: boolean }) {
   return (
     // Center the visible capitals, without the font's ascender/descender space.
     // Padding keeps ascenders and round-letter overshoot inside the truncation clip.
-    <span className="inline-flex min-w-0 items-baseline gap-1 text-sm font-medium tracking-tight">
+    <span className="inline-flex min-w-0 items-baseline gap-1.5 text-sm font-semibold tracking-tight">
       <T3Wordmark aria-label="T3" className="h-[1cap] w-auto shrink-0" />
       <span
         className={cn(
@@ -134,6 +134,16 @@ function SidebarBrandMark({ onBackdrop }: { onBackdrop: boolean }) {
         )}
       >
         Code
+      </span>
+      <span
+        className={cn(
+          "ml-1 self-center rounded border px-1.5 py-0.5 font-mono text-3xs font-medium tracking-widest",
+          onBackdrop
+            ? "border-white/30 text-white"
+            : "border-warning/25 bg-warning/8 text-warning-foreground",
+        )}
+      >
+        STUDIO
       </span>
     </span>
   );
